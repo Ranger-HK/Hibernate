@@ -21,13 +21,13 @@ public class AppInitializer {
         customer.setId("C002");
         customer.setName("Prathibha");
         customer.setAddress("Kadawtha");
-        customer.setSalary(800000);
+        customer.setSalary(1000000);
 
         Session session = FactoryConfiguration.getInstance().getSession();
 
         Transaction transaction = session.beginTransaction();
 
-        session.save(customer);
+        session.update(customer);
 
         transaction.commit();
 
