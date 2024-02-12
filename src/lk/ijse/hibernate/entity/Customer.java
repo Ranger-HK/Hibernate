@@ -1,11 +1,17 @@
 package lk.ijse.hibernate.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * @Created By Ravindu Prathibha
  * @created 2/12/2024 - 5:14 PM
  * @project Hibernate
  */
+
+@Entity
 public class Customer {
+    @Id
     private String id;
     private String name;
     private String address;
