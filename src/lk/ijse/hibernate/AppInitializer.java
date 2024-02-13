@@ -108,16 +108,18 @@ public class AppInitializer {
         //session.save(student);
         //session.save(person);
         //session.save(passport);
-
-        session.save(owner);
-        session.save(pet1);
-        session.save(pet2);
+        //session.save(owner);
+        //session.save(pet1);
+        //session.save(pet2);
 
 
         session.update(customer);
         session.update(student);
         session.update(person);
         session.update(passport);
+        session.update(owner);
+        session.update(pet1);
+        session.update(pet2);
 
 
         //Customer
