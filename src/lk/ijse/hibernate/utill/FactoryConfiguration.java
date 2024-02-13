@@ -21,7 +21,9 @@ public class FactoryConfiguration {
                     .addAnnotatedClass(Person.class)
                     .addAnnotatedClass(Passport.class)
                     .addAnnotatedClass(Owner.class)
-                    .addAnnotatedClass(Pet.class);
+                    .addAnnotatedClass(Pet.class)
+                    .addAnnotatedClass(Lecturer.class)
+                    .addAnnotatedClass(Subject.class);
             sessionFactory=configuration.buildSessionFactory();
 
         }

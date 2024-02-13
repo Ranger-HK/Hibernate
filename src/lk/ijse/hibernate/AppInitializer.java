@@ -100,6 +100,46 @@ public class AppInitializer {
         pet2.setOwner(owner);
 
 
+        //Lecturer
+        Lecturer l1 = new Lecturer();
+        l1.setlId("L-001");
+        l1.setlName("Ravindu");
+
+        Lecturer l2 = new Lecturer();
+        l2.setlId("L-002");
+        l2.setlName("Prathibha");
+
+        Lecturer l3 = new Lecturer();
+        l3.setlId("L-003");
+        l3.setlName("Buli");
+
+        //Subject
+        Subject su1 = new Subject();
+        su1.setsId("S-001");
+        su1.setsName("Java");
+
+        Subject su2 = new Subject();
+        su2.setsId("S-002");
+        su2.setsName("C#");
+
+        Subject su3 = new Subject();
+        su3.setsId("S-003");
+        su3.setsName("Hibernate");
+
+
+        //Lecturer List
+        l1.getSubjectList().add(su1);
+        l2.getSubjectList().add(su2);
+        l3.getSubjectList().add(su3);
+        l3.getSubjectList().add(su2);
+
+
+        //Subject List
+        su1.getLecturerList().add(l1);
+        su2.getLecturerList().add(l2);
+        su3.getLecturerList().add(l3);
+
+
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -111,6 +151,12 @@ public class AppInitializer {
         //session.save(owner);
         //session.save(pet1);
         //session.save(pet2);
+        session.save(l1);
+        session.save(l2);
+        session.save(l3);
+        session.save(su1);
+        session.save(su2);
+        session.save(su3);
 
 
         session.update(customer);
@@ -120,10 +166,17 @@ public class AppInitializer {
         session.update(owner);
         session.update(pet1);
         session.update(pet2);
+        session.update(l1);
+        session.update(l2);
+        session.update(l3);
+        session.update(su1);
+        session.update(su2);
+        session.update(su3);
+
 
 
         //Customer
-        Customer c1 = session.get(Customer.class, "C001");
+        Customer c1 = session.get(Customer.class,  "C001");
         System.out.println(c1);
         Customer c2 = session.get(Customer.class, "C002");
         System.out.println(c2);
