@@ -2,6 +2,8 @@ package lk.ijse.hibernate;
 
 import lk.ijse.hibernate.embeded.Name;
 import lk.ijse.hibernate.entity.Customer;
+import lk.ijse.hibernate.entity.Passport;
+import lk.ijse.hibernate.entity.Person;
 import lk.ijse.hibernate.entity.Student;
 import lk.ijse.hibernate.utill.FactoryConfiguration;
 import org.hibernate.Session;
@@ -14,6 +16,8 @@ import org.hibernate.Transaction;
  */
 public class AppInitializer {
     public static void main(String[] args) {
+
+        //Customer
         Customer customer = new Customer();
 
         customer.setId("C001");
@@ -27,6 +31,7 @@ public class AppInitializer {
         customer.setSalary(1000000);
 
 
+        //Name - Student
         Name name1 = new Name();
         name1.setfName("Don");
         name1.setmName("Ranasuriya");
@@ -38,6 +43,7 @@ public class AppInitializer {
         name2.setlName("Rathnayaka");
 
 
+        //Student
         Student student = new Student();
 
         student.setId("S001");
@@ -48,27 +54,70 @@ public class AppInitializer {
         student.setName(name2);
         student.setAddress("Nawala");
 
+
+        //Person
+        Person person = new Person();
+
+        person.setId("P001");
+        person.setName("Nimal");
+
+        person.setId("P002");
+        person.setName("Kumara");
+
+
+        //Passport
+        Passport passport = new Passport();
+
+        passport.setPsId("PS001");
+        passport.setFee(2500);
+        passport.setPerson(person);
+
+        passport.setPsId("PS002");
+        passport.setFee(5500);
+        passport.setPerson(person);
+
+
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
 
         //session.save(customer);
         //session.save(student);
+        session.save(person);
+        session.save(passport);
 
         session.update(customer);
         session.update(student);
+        session.update(person);
+        session.update(passport);
 
+
+        //Customer
         Customer c1 = session.get(Customer.class, "C001");
         System.out.println(c1);
-
         Customer c2 = session.get(Customer.class, "C002");
         System.out.println(c2);
 
+        //Student
         Student s1 = session.get(Student.class, "S001");
         System.out.println(s1);
-
         Student s2 = session.get(Student.class, "S002");
         System.out.println(s2);
+
+        //Person
+        Person p1 = session.get(Person.class, "P001");
+        System.out.println(p1);
+
+        Person p2= session.get(Person.class, "P002");
+        System.out.println(p2);
+
+        //Passport
+        Passport ps1 = session.get(Passport.class, "PS001");
+        System.out.println(ps1);
+
+        Passport ps2 = session.get(Passport.class, "PS002");
+        System.out.println(ps2);
+
 
        /* session.update(customer);
         Customer c1 = session.get(Customer.class, "C001");

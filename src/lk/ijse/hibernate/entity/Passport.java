@@ -2,7 +2,6 @@ package lk.ijse.hibernate.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -15,16 +14,16 @@ public class Passport {
     @Id
     private String psId;
     private double fee;
-
     @OneToOne
     private Person person;
 
     public Passport() {
     }
 
-    public Passport(String psId, double fee) {
+    public Passport(String psId, double fee, Person person) {
         this.setPsId(psId);
         this.setFee(fee);
+        this.setPerson(person);
     }
 
     public String getPsId() {
@@ -43,11 +42,20 @@ public class Passport {
         this.fee = fee;
     }
 
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
     @Override
     public String toString() {
         return "Passport{" +
                 "psId='" + psId + '\'' +
                 ", fee=" + fee +
+                ", person=" + person +
                 '}';
     }
 }
