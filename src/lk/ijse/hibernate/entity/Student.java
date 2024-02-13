@@ -1,11 +1,9 @@
 package lk.ijse.hibernate.entity;
 
+import lk.ijse.hibernate.embeded.Name;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -19,12 +17,13 @@ public class Student {
     @Id
     @Column(name = "studentId")
     private String id;
-    private String name;
+    @Embedded
+    private Name name;
     private String address;
     @CreationTimestamp
     private Date date;
 
-    public Student(String id, String name, String address, Date date) {
+    public Student(String id, Name name, String address, Date date) {
         this.setId(id);
         this.setName(name);
         this.setAddress(address);
@@ -42,11 +41,11 @@ public class Student {
         this.id = id;
     }
 
-    public String getName() {
+    public Name getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Name name) {
         this.name = name;
     }
 
