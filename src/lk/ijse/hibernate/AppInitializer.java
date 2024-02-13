@@ -52,8 +52,8 @@ public class AppInitializer {
         Transaction transaction = session.beginTransaction();
 
 
-        session.save(customer);
-        session.save(student);
+        //session.save(customer);
+        //session.save(student);
 
         session.update(customer);
         session.update(student);

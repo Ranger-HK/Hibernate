@@ -1,6 +1,8 @@
 package lk.ijse.hibernate.utill;
 
 import lk.ijse.hibernate.entity.Customer;
+import lk.ijse.hibernate.entity.Passport;
+import lk.ijse.hibernate.entity.Person;
 import lk.ijse.hibernate.entity.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,7 +20,9 @@ public class FactoryConfiguration {
         private FactoryConfiguration(){
             Configuration configuration = new Configuration().configure()
                     .addAnnotatedClass(Customer.class)
-                    .addAnnotatedClass(Student.class);
+                    .addAnnotatedClass(Student.class)
+                    .addAnnotatedClass(Person.class)
+                    .addAnnotatedClass(Passport.class);
             sessionFactory=configuration.buildSessionFactory();
 
         }
