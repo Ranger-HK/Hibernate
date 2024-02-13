@@ -1,6 +1,7 @@
 package lk.ijse.hibernate;
 
 import lk.ijse.hibernate.entity.Customer;
+import lk.ijse.hibernate.entity.Student;
 import lk.ijse.hibernate.utill.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -23,14 +24,26 @@ public class AppInitializer {
         customer.setAddress("Kadawtha");
         customer.setSalary(1000000);
 
-        Session session = FactoryConfiguration.getInstance().getSession();
+        Student student = new Student();
+        student.setId("S001");
+        student.setName("Kamal");
+        student.setAddress("Colombo");
 
+        Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
+
         session.update(customer);
+        session.save(student);
+
+       /* session.update(customer);
+        Customer c1 = session.get(Customer.class, "C001");
+        System.out.println(c1);
+        System.out.println(c1.getName());*/
+
+
 
         transaction.commit();
-
         session.close();
     }
 }
