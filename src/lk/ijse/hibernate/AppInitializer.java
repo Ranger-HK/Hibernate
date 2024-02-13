@@ -1,10 +1,7 @@
 package lk.ijse.hibernate;
 
 import lk.ijse.hibernate.embeded.Name;
-import lk.ijse.hibernate.entity.Customer;
-import lk.ijse.hibernate.entity.Passport;
-import lk.ijse.hibernate.entity.Person;
-import lk.ijse.hibernate.entity.Student;
+import lk.ijse.hibernate.entity.*;
 import lk.ijse.hibernate.utill.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -77,14 +74,45 @@ public class AppInitializer {
         passport.setPerson(person);
 
 
+        //Owner
+        Owner owner = new Owner();
+        owner.setoId("O-001");
+        owner.setName("Sukumali");
+
+
+        //Pet1
+        Pet pet1 = new Pet();
+        pet1.setpId("P-001");
+        pet1.setpName("Cat");
+
+
+        //Pet1
+        Pet pet2 = new Pet();
+        pet2.setpId("P-002");
+        pet2.setpName("Cat");
+
+        //Owner List
+        owner.getPetList().add(pet1);
+        owner.getPetList().add(pet2);
+
+        //Pet Object
+        pet1.setOwner(owner);
+        pet2.setOwner(owner);
+
+
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
 
         //session.save(customer);
         //session.save(student);
-        session.save(person);
-        session.save(passport);
+        //session.save(person);
+        //session.save(passport);
+
+        session.save(owner);
+        session.save(pet1);
+        session.save(pet2);
+
 
         session.update(customer);
         session.update(student);
@@ -107,23 +135,14 @@ public class AppInitializer {
         //Person
         Person p1 = session.get(Person.class, "P001");
         System.out.println(p1);
-
         Person p2= session.get(Person.class, "P002");
         System.out.println(p2);
 
         //Passport
         Passport ps1 = session.get(Passport.class, "PS001");
         System.out.println(ps1);
-
         Passport ps2 = session.get(Passport.class, "PS002");
         System.out.println(ps2);
-
-
-       /* session.update(customer);
-        Customer c1 = session.get(Customer.class, "C001");
-        System.out.println(c1);
-        System.out.println(c1.getName());*/
-
 
 
         transaction.commit();
