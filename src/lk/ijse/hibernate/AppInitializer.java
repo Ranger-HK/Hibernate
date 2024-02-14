@@ -151,15 +151,15 @@ public class AppInitializer {
         //session.save(owner);
         //session.save(pet1);
         //session.save(pet2);
-        session.save(l1);
-        session.save(l2);
-        session.save(l3);
-        session.save(su1);
-        session.save(su2);
-        session.save(su3);
+        //session.save(l1);
+        //session.save(l2);
+        //session.save(l3);
+        //session.save(su1);
+        //session.save(su2);
+        //session.save(su3);
 
 
-        session.update(customer);
+      /*  session.update(customer);
         session.update(student);
         session.update(person);
         session.update(passport);
@@ -172,10 +172,10 @@ public class AppInitializer {
         session.update(su1);
         session.update(su2);
         session.update(su3);
+*/
 
 
-
-        //Customer
+      /*  //Customer
         Customer c1 = session.get(Customer.class,  "C001");
         System.out.println(c1);
         Customer c2 = session.get(Customer.class, "C002");
@@ -199,6 +199,13 @@ public class AppInitializer {
         Passport ps2 = session.get(Passport.class, "PS002");
         System.out.println(ps2);
 
+*/
+
+        Owner o1 = session.get(Owner.class, "O-001");
+        System.out.println(o1);
+        System.out.println(o1.getoId());
+        System.out.println(o1.getName());
+        System.out.println(o1.getPetList());
 
         transaction.commit();
         session.close();

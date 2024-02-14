@@ -1,6 +1,7 @@
 package lk.ijse.hibernate.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
@@ -17,6 +18,11 @@ public class Owner {
     private String oId;
     private String name;
 
+    //EAGER FETCHING
+    /*@OneToMany(mappedBy = "owner" , fetch = FetchType.EAGER)
+    private List<Pet>petList=new ArrayList<>();*/
+
+    //LAZY FETCHING
     @OneToMany(mappedBy = "owner")
     private List<Pet>petList=new ArrayList<>();
 
@@ -58,7 +64,6 @@ public class Owner {
         return "Owner{" +
                 "oId='" + oId + '\'' +
                 ", name='" + name + '\'' +
-                ", petList=" + petList +
                 '}';
     }
 }
