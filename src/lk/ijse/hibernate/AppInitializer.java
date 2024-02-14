@@ -5,6 +5,10 @@ import lk.ijse.hibernate.entity.*;
 import lk.ijse.hibernate.utill.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
+
+import java.util.List;
 
 /**
  * @Created By Ravindu Prathibha
@@ -26,6 +30,13 @@ public class AppInitializer {
         customer.setName("Prathibha");
         customer.setAddress("Kadawtha");
         customer.setSalary(1000000);
+
+        Customer customer1 = new Customer();
+
+        customer1.setId("C003");
+        customer1.setName("Buli");
+        customer1.setAddress("Walgama");
+        customer1.setSalary(800000);
 
 
         //Name - Student
@@ -145,6 +156,7 @@ public class AppInitializer {
 
 
         //session.save(customer);
+       // session.save(customer1);
         //session.save(student);
         //session.save(person);
         //session.save(passport);
@@ -211,7 +223,7 @@ public class AppInitializer {
 
         // get () Method VS load () Method
 
-        //get () -->>> Eager Fetching
+     /*   //get () -->>> Eager Fetching
         Owner o1 = session.get(Owner.class, "O-001");
         System.out.println(o1.getoId()); // --->> Execute Query
         System.out.println(o1.getName()); // --->> Execute Query
@@ -219,7 +231,132 @@ public class AppInitializer {
         //load () -->>> Lazy Fetching
         Owner o2 = session.load(Owner.class, "O-001");
         System.out.println(o2.getoId()); // --->> Not Execute Query
-        System.out.println(o2.getName()); // --->> Execute Query
+        System.out.println(o2.getName()); // --->> Execute Query*/
+
+
+        Customer c1 = session.get(Customer.class,  "C001");
+        System.out.println(c1);
+
+       /* //HQL -->>> Select Query
+        String hql = "FROM Customer";
+        Query query = session.createQuery(hql);
+        List<Customer>list = query.list();
+
+        for (Customer cus : list) {
+            System.out.println(cus.getId());
+            System.out.println(cus.getName());
+            System.out.println(cus.getAddress());
+            System.out.println(cus.getSalary());
+        } */
+
+       /* //HQL -->>> Select Specified Column Query
+        String hql = "SELECT name FROM Customer";
+        Query query = session.createQuery(hql);
+        List<String>list = query.list();
+
+        for (String name : list) {
+            System.out.println(name);
+
+        }*/
+
+     /*    //HQL -->>> Using WHERE Clause Query
+        String hql = "FROM Customer c WHERE name LIKE 'Pr%' ";
+        Query query = session.createQuery(hql);
+        List<Customer>list = query.list();
+
+        for (Customer c : list) {
+            System.out.println(c.getId());
+            System.out.println(c.getName());
+        }*/
+
+
+     /*   //HQL -->>> Using ORDER BY Clause Query -->> Descending Order
+        String hql = "FROM Customer c ORDER BY c.id DESC";
+        Query query = session.createQuery(hql);
+        List<Customer>list = query.list();
+
+        for (Customer c : list) {
+            System.out.println(c.getId());
+            System.out.println(c.getName());
+        }
+
+
+        //HQL -->>> Using ORDER BY Clause Query -->> Ascending Order
+        String hql = "FROM Customer c ORDER BY c.id ASC";
+        Query query = session.createQuery(hql);
+        List<Customer>list = query.list();
+
+        for (Customer c : list) {
+            System.out.println(c.getId());
+            System.out.println(c.getName());
+        }*/
+
+
+      /*  //HQL -->>> Using Name Parameters Query
+        String name = "Ravindu";
+        String hql = "FROM Customer WHERE name = :owner_name";
+        Query query = session.createQuery(hql);
+        query.setParameter("owner_name",name);
+        List<Customer>list = query.list();
+
+        for (Customer c : list) {
+            System.out.println(c.getId());
+            System.out.println(c.getName());
+        }
+*/
+
+      /*  //HQL -->>> Update Query
+        String id = "C003";
+        String name = "Ranger";
+
+        String hql = "UPDATE Customer SET name = :owner_name WHERE id = :owner_id";
+        Query query = session.createQuery(hql);
+        query.setParameter("owner_id",id);
+        query.setParameter("owner_name",name);
+
+        int rowcount=query.executeUpdate();
+        if(rowcount>0){
+            System.out.println("DONE");
+        }else{
+            System.out.println("ERROR");
+        }*/
+
+/*
+          //HQL -->>> Delete Query
+        String id = "C003";
+        String name = "Ranger";
+
+        String hql = "DELETE FROM Customer WHERE id = :owner_id";
+        Query query = session.createQuery(hql);
+        query.setParameter("owner_id",id);
+
+        int rowcount=query.executeUpdate();
+        if(rowcount>0){
+            System.out.println("DONE");
+        }else{
+            System.out.println("ERROR");
+        }*/
+
+
+     /*   //HQL -->>> Join Query
+        String hql = "SELECT o.oId,o.name,p.pId FROM Owner o INNER JOIN Pet p on o.oId = p.owner";
+        List <Object[]> result = session.createQuery(hql).list();
+
+        for (Object[] objects : result) {
+            System.out.println(objects[0]+" "+objects[1]+" "+objects[2]);
+        }*/
+
+
+        //Native SQL
+        String sql="SELECT * FROM owner";
+        NativeQuery sqlQuery = session.createSQLQuery(sql);
+        sqlQuery.addEntity(Owner.class);
+        List<Owner> result = sqlQuery.list();
+
+        for (Owner owner1 : result) {
+            System.out.println(owner1.getoId());
+            System.out.println(owner1.getName());
+        }
 
         transaction.commit();
         session.close();
