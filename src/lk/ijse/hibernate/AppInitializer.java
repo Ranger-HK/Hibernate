@@ -201,11 +201,25 @@ public class AppInitializer {
 
 */
 
-        Owner o1 = session.get(Owner.class, "O-001");
+       /* Owner o1 = session.get(Owner.class, "O-001");
         System.out.println(o1);
         System.out.println(o1.getoId());
         System.out.println(o1.getName());
-        System.out.println(o1.getPetList());
+        System.out.println(o1.getPetList());*/
+
+
+
+        // get () Method VS load () Method
+
+        //get () -->>> Eager Fetching
+        Owner o1 = session.get(Owner.class, "O-001");
+        System.out.println(o1.getoId()); // --->> Execute Query
+        System.out.println(o1.getName()); // --->> Execute Query
+
+        //load () -->>> Lazy Fetching
+        Owner o2 = session.load(Owner.class, "O-001");
+        System.out.println(o2.getoId()); // --->> Not Execute Query
+        System.out.println(o2.getName()); // --->> Execute Query
 
         transaction.commit();
         session.close();
