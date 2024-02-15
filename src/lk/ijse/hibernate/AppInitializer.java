@@ -18,7 +18,7 @@ import java.util.List;
 public class AppInitializer {
     public static void main(String[] args) {
 
-        //Customer
+       /* //Customer
         Customer customer = new Customer();
 
         customer.setId("C001");
@@ -30,15 +30,10 @@ public class AppInitializer {
         customer.setName("Prathibha");
         customer.setAddress("Kadawtha");
         customer.setSalary(1000000);
-
-        Customer customer1 = new Customer();
-
-        customer1.setId("C003");
-        customer1.setName("Buli");
-        customer1.setAddress("Walgama");
-        customer1.setSalary(800000);
+*/
 
 
+/*
         //Name - Student
         Name name1 = new Name();
         name1.setfName("Don");
@@ -148,11 +143,34 @@ public class AppInitializer {
         //Subject List
         su1.getLecturerList().add(l1);
         su2.getLecturerList().add(l2);
-        su3.getLecturerList().add(l3);
+        su3.getLecturerList().add(l3);*/
+
+
+
+        //First Level Caching Start
+        Customer customer2 = new Customer();
+
+        customer2.setId("C003");
+        customer2.setName("Buli");
+        customer2.setAddress("Walgama");
+        customer2.setSalary(800000);
 
 
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
+
+
+        session.save(customer2);
+        session.update(customer2);
+
+        Customer c1 = session.get(Customer.class,  "C001");
+        System.out.println(c1);
+
+        Customer c2 = session.get(Customer.class,  "C001");
+        System.out.println(c2);
+
+        //First Level Caching End
+
 
 
         //session.save(customer);
@@ -234,8 +252,6 @@ public class AppInitializer {
         System.out.println(o2.getName()); // --->> Execute Query*/
 
 
-        Customer c1 = session.get(Customer.class,  "C001");
-        System.out.println(c1);
 
        /* //HQL -->>> Select Query
         String hql = "FROM Customer";
@@ -346,7 +362,7 @@ public class AppInitializer {
             System.out.println(objects[0]+" "+objects[1]+" "+objects[2]);
         }*/
 
-
+/*
         //Native SQL
         String sql="SELECT * FROM owner";
         NativeQuery sqlQuery = session.createSQLQuery(sql);
@@ -356,7 +372,7 @@ public class AppInitializer {
         for (Owner owner1 : result) {
             System.out.println(owner1.getoId());
             System.out.println(owner1.getName());
-        }
+        }*/
 
         transaction.commit();
         session.close();
