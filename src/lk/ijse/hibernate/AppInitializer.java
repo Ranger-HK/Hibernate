@@ -430,11 +430,11 @@ public class AppInitializer {
         session.update(customer4);
         customer4.setAddress("Jaffna");
 
-      /*  Customer c1 = session.get(Customer.class,  "C001");
+        Customer c1 = session.get(Customer.class,  "C001");
         System.out.println(c1);
 
         Customer c2 = session.get(Customer.class,  "C001");
-        System.out.println(c2);*/
+        System.out.println(c2);
 
         transaction.commit();
         session.close();
