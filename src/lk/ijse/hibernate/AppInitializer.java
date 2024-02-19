@@ -147,7 +147,7 @@ public class AppInitializer {
 
 
 
-        //First Level Caching Start
+      /*  //First Level Caching Start
         Customer customer2 = new Customer();
 
         customer2.setId("C003");
@@ -169,7 +169,31 @@ public class AppInitializer {
         Customer c2 = session.get(Customer.class,  "C001");
         System.out.println(c2);
 
-        //First Level Caching End
+        //First Level Caching End*/
+
+/*
+
+        // Second Level Caching Start
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Session session2 = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Customer c1 = session.get(Customer.class,  "C001");
+        System.out.println(c1);
+
+        Customer c2 = session.get(Customer.class,  "C001");
+        System.out.println(c2);
+
+        Customer c3 = session2.get(Customer.class,  "C001");
+        System.out.println(c3);
+
+        Customer c4 = session2.get(Customer.class,  "C001");
+        System.out.println(c4);
+
+
+        // Second Level Caching Start
+*/
+
 
 
 
@@ -374,7 +398,46 @@ public class AppInitializer {
             System.out.println(owner1.getName());
         }*/
 
+
+        //HIBERNATE OBJECT LIFE CYCLE
+
+        //Transient State
+        Customer customer4 = new Customer();
+        customer4.setId("C006");
+        customer4.setName("kamal");
+        customer4.setAddress("Colombo");
+        customer4.setSalary(600000);
+
+
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        //Persistence State
+        session.save(customer4);
+        customer4.setAddress("Nuwara");
+
+
+        //Detached State
+        session.detach(customer4);
+        customer4.setAddress("Jaffna");
+
+        //Remove Fetching Object
+        Customer c5 = session.get(Customer.class, "C005");
+        session.delete(c5);
+
+
+        //Detached State Object Pass Persistence State and  Update
+        session.update(customer4);
+        customer4.setAddress("Jaffna");
+
+      /*  Customer c1 = session.get(Customer.class,  "C001");
+        System.out.println(c1);
+
+        Customer c2 = session.get(Customer.class,  "C001");
+        System.out.println(c2);*/
+
         transaction.commit();
         session.close();
+        //session2.close();
     }
 }
