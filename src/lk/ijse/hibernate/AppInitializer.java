@@ -421,7 +421,7 @@ public class AppInitializer {
         session.detach(customer4);
         customer4.setAddress("Jaffna");
 
-        //Remove Fetching Object
+        //Remove State --- Fetching and remove Object
         Customer c5 = session.get(Customer.class, "C005");
         session.delete(c5);
 
